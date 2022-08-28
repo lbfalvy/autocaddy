@@ -1,0 +1,12 @@
+#!/bin/bash
+cd /lego
+certfile=".lego/certificates/_.$DOMAIN.crt"
+if [ ! -f $certfile ]; then
+    # If a certificate doesn't exist yet, obtain one first
+    lego --accept-tos --email=$EMAIL --domains="*.$DOMAIN" --dns=$DNS run
+    exit $?
+else
+    # Refresh if needed
+    lego --accept-tos --email=$EMAIL --domains="*.$DOMAIN" --dns=$DNS renew
+    exit $?
+fi
