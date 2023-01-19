@@ -19,9 +19,10 @@ A Caddy instance configured to reverse-proxy subdomains to hostnames.
 Example command for Linode:
 
 ```bash
-docker run -d -p 80:80 -p 443:443 --net exposed \
+docker run -d --restart always --name auto-gateway \
+    -p 80:80 -p 443:443 --net exposed \
     -e DOMAIN=example.com -e EMAIL=webmaster@example.com \
-    -e DNS=linode -e LINODE_TOKEN=<token>
+    -e DNS=linode -e LINODE_TOKEN=0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef \
     -v autocaddy_config:/config -v autocaddy_data:/data -v autocaddy_lego:/lego \
     lbfalvy/autocaddy
 ```
